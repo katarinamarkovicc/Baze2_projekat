@@ -1,0 +1,288 @@
+﻿<Window x:Class="Projekat.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Projekat"
+        mc:Ignorable="d"
+        Title="Sistem Restorana" Height="450" Width="800" Loaded="Window_Loaded" Closing="Window_Closing">
+    <Window.Resources>
+        <CollectionViewSource x:Key="praviViewSource"/>
+        <CollectionViewSource x:Key="sadrziViewSource"/>
+        <CollectionViewSource x:Key="narucujeViewSource"/>
+        <CollectionViewSource x:Key="namirnicaViewSource"/>
+        <CollectionViewSource x:Key="jeloViewSource"/>
+        <CollectionViewSource x:Key="stavkaMenijaViewSource"/>
+        <CollectionViewSource x:Key="meniViewSource"/>
+        <CollectionViewSource x:Key="stoViewSource"/>
+        <CollectionViewSource x:Key="gostViewSource"/>
+        <CollectionViewSource x:Key="konobarViewSource"/>
+        <CollectionViewSource x:Key="kuvarViewSource"/>
+        <CollectionViewSource x:Key="kuhinjaViewSource"/>
+        <CollectionViewSource x:Key="restoranViewSource"/>
+        <CollectionViewSource x:Key="radnikViewSource"/>
+        <CollectionViewSource x:Key="vlasnikViewSource"/>
+    </Window.Resources>
+    <Grid>
+        <TabControl Width="770" Height="375" VerticalAlignment="Top">
+            <TabItem Header="Vlasnik">
+                <DataGrid x:Name="vlasnikDataGrid"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Source={StaticResource vlasnikViewSource}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding SifrV}" 
+                                            Header="SifrV"
+                                            IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding Jmbg}" 
+                                            Header="JMBG"/>
+                        <DataGridTextColumn Binding="{Binding Ime}"
+                                            Header="Ime"/>
+                        <DataGridTextColumn Binding="{Binding Prz}"
+                                            Header="Prezime"/>
+                        <DataGridTextColumn Binding="{Binding BrTel}"
+                                            Header="Broj telefona"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Radnik">
+                <DataGrid x:Name="radnikDataGrid"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Source={StaticResource radnikViewSource}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding SifrR}" 
+                                            Header="SifrR"
+                                            IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding Jmbg}" 
+                                            Header="JMBG"/>
+                        <DataGridTextColumn Binding="{Binding Ime}"
+                                            Header="Ime"/>
+                        <DataGridTextColumn Binding="{Binding Prz}"
+                                            Header="Prezime"/>
+                        <DataGridTextColumn Binding="{Binding BrTel}"
+                                            Header="Broj telefona"/>
+                        <DataGridTextColumn Binding="{Binding Plt}"
+                                            Header="Plata"/>
+                        <DataGridComboBoxColumn Header="Vlasnik"
+                                                ItemsSource="{Binding Source={StaticResource vlasnikViewSource}}"
+                                                DisplayMemberPath="Ime"
+                                                SelectedValueBinding="{Binding SifrV}"
+                                                SelectedValuePath="SifrV"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Restoran">
+                <DataGrid x:Name="restoranDataGrid"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Source={StaticResource restoranViewSource}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Sifr}" 
+                                            Header="Sifr"
+                                            IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding Naz}" 
+                                            Header="Naziv"/>
+                        <DataGridTextColumn Binding="{Binding Adr}"
+                                            Header="Adresa"/>
+                        <DataGridTextColumn Binding="{Binding Mest}"
+                                            Header="Mesto"/>
+                        <DataGridComboBoxColumn Header="Vlasnik"
+                                                ItemsSource="{Binding Source={StaticResource vlasnikViewSource}}"
+                                                DisplayMemberPath="Ime"
+                                                SelectedValueBinding="{Binding SifrV}"
+                                                SelectedValuePath="SifrV"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Kuhinja">
+                <DataGrid x:Name="kuhinjaDataGrid"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Source={StaticResource kuhinjaViewSource}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding SifrK}" 
+                                            Header="SifrK"
+                                            IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding Vel}" 
+                                            Header="Velicina"/>
+                        <DataGridTextColumn Binding="{Binding Kap}"
+                                            Header="Kapacitet"/>
+                        <DataGridComboBoxColumn Header="Restoran"
+                                                ItemsSource="{Binding Source={StaticResource restoranViewSource}}"
+                                                DisplayMemberPath="Naz"
+                                                SelectedValueBinding="{Binding Sifr}"
+                                                SelectedValuePath="Sifr"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Kuvar">
+                <DataGrid x:Name="kuvarDataGrid"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Source={StaticResource kuvarViewSource}}">
+                    <DataGrid.Columns>
+                        <DataGridComboBoxColumn Header="Radnik"
+                                                ItemsSource="{Binding Source={StaticResource radnikViewSource}}"
+                                                DisplayMemberPath="Ime"
+                                                SelectedValueBinding="{Binding SifrR}"
+                                                SelectedValuePath="SifrR"/>
+                        <DataGridComboBoxColumn Header="Kuhinja"
+                                                ItemsSource="{Binding Source={StaticResource kuhinjaViewSource}}"
+                                                DisplayMemberPath="SifrK"
+                                                SelectedValueBinding="{Binding SifrK}"
+                                                SelectedValuePath="SifrK"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Konobar">
+                <DataGrid x:Name="konobarDataGrid"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Source={StaticResource konobarViewSource}}">
+                    <DataGrid.Columns>
+                        <DataGridComboBoxColumn Header="Radnik"
+                                                ItemsSource="{Binding Source={StaticResource radnikViewSource}}"
+                                                DisplayMemberPath="Ime"
+                                                SelectedValueBinding="{Binding SifrR}"
+                                                SelectedValuePath="SifrR"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Gost">
+                <DataGrid x:Name="gostDataGrid"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Source={StaticResource gostViewSource}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding SifrG}" 
+                                            Header="SifrG"
+                                            IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding Jmbg}" 
+                                            Header="JMBG"/>
+                        <DataGridTextColumn Binding="{Binding Ime}"
+                                            Header="Ime"/>
+                        <DataGridTextColumn Binding="{Binding Prz}"
+                                            Header="Prezime"/>
+                        <DataGridTextColumn Binding="{Binding BrTel}"
+                                            Header="Broj telefona"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Sto">
+                <DataGrid x:Name="stoDataGrid"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Source={StaticResource stoViewSource}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding SifrS}" 
+                                            Header="SifrS"
+                                            IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding BrStol}" 
+                                            Header="Broj stolica"/>
+                        <DataGridTextColumn Binding="{Binding Poj}"
+                                            Header="Pojavljuje se gost"/>
+                        <DataGridComboBoxColumn Header="Restoran"
+                                                ItemsSource="{Binding Source={StaticResource restoranViewSource}}"
+                                                DisplayMemberPath="Naz"
+                                                SelectedValueBinding="{Binding Sifr}"
+                                                SelectedValuePath="Sifr"/>
+                        <DataGridComboBoxColumn Header="Gost"
+                                                ItemsSource="{Binding Source={StaticResource gostViewSource}}"
+                                                DisplayMemberPath="Ime"
+                                                SelectedValueBinding="{Binding SifrG}"
+                                                SelectedValuePath="SifrG"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Meni">
+                <DataGrid x:Name="meniDataGrid"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Source={StaticResource meniViewSource}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding SifrM}" 
+                                            Header="SifrM"
+                                            IsReadOnly="True"/>
+                        <DataGridComboBoxColumn Header="Restoran"
+                                                ItemsSource="{Binding Source={StaticResource restoranViewSource}}"
+                                                DisplayMemberPath="Naz"
+                                                SelectedValueBinding="{Binding Sifr}"
+                                                SelectedValuePath="Sifr"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Stavka Menija">
+                <DataGrid x:Name="stavkaMenijaDataGrid"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Source={StaticResource stavkaMenijaViewSource}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding SifrSM}" 
+                                            Header="SifrSM"
+                                            IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding Naz}" 
+                                            Header="Naziv"/>
+                        <DataGridTextColumn Binding="{Binding Cen}"
+                                            Header="Cena"/>
+                        <DataGridComboBoxColumn Header="Meni"
+                                                ItemsSource="{Binding Source={StaticResource meniViewSource}}"
+                                                DisplayMemberPath="SifrM"
+                                                SelectedValueBinding="{Binding SifrM}"
+                                                SelectedValuePath="SifrM"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Jelo">
+                <DataGrid x:Name="jeloDataGrid"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Source={StaticResource jeloViewSource}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding SifrJ}" 
+                                            Header="SifrJ"
+                                            IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding UkCena}" 
+                                            Header="Ukupna cena"/>
+                        <DataGridTextColumn Binding="{Binding UkGram}"
+                                            Header="Ukupna gramaza"/>
+                        <DataGridTextColumn Binding="{Binding Naz}"
+                                            Header="Naziv"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Namirnica">
+                <DataGrid x:Name="namirnicaDataGrid"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Source={StaticResource namirnicaViewSource}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding SifrN}" 
+                                            Header="SifrJ"
+                                            IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding Gram}" 
+                                            Header="Gramaza"/>
+                        <DataGridTextColumn Binding="{Binding Cen}"
+                                            Header="Cena"/>
+                        <DataGridTextColumn Binding="{Binding Naz}"
+                                            Header="Naziv"/>
+                        <DataGridComboBoxColumn Header="Jelo"
+                                                ItemsSource="{Binding Source={StaticResource jeloViewSource}}"
+                                                DisplayMemberPath="SifrJ"
+                                                SelectedValueBinding="{Binding SifrJ}"
+                                                SelectedValuePath="SifrJ"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Narucuje">
+                <DataGrid x:Name="narucujeDataGrid"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Source={StaticResource narucujeViewSource}}">
+                    <DataGrid.Columns>
+                        <DataGridComboBoxColumn Header="Gost"
+                                                ItemsSource="{Binding Source={StaticResource gostViewSource}}"
+                                                DisplayMemberPath="Ime"
+                                                SelectedValueBinding="{Binding SifrG}"
+                                                SelectedValuePath="SifrG"/>
+                        <DataGridComboBoxColumn Header="Jelo"
+                                                ItemsSource="{Binding Source={StaticResource jeloViewSource}}"
+                                                DisplayMemberPath="SifrJ"
+                                                SelectedValueBinding="{Binding SifrJ}"
+                                                SelectedValuePath="SifrJ"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+        </TabControl>
+        <Button Content="Snimanje" 
+                HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+                Height="20" Width="80" Margin="10,10,10,10" Click="Button_Click"/>
+    </Grid>
+</Window>
